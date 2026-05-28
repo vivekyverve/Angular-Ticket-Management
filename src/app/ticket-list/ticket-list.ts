@@ -22,6 +22,7 @@ export class TicketList implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   tickets: TicketValue[] = [];
+  paginatorOptions: number[] = [5, 10, 25, 100];
   displayedColumns: string[] = ['id', 'status', 'tracker', 'priority', 'subject', 'description', 'assignee', 'startDate', 'dueDate', 'updatedDate', 'progress', 'estimatedHours', 'action'];
 
   dataSource = new MatTableDataSource<TicketValue>(this.tickets);
