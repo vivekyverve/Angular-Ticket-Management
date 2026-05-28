@@ -1,0 +1,185 @@
+<!-- <div class="container p-3">
+    <div class="container d-flex justify-content-between align-items-center ">
+        <div class="">
+            <button class="btn btn-secondary" routerLink="/add">Add Ticket</button>
+        </div>
+        <div>
+            <input class="form-control" matInput placeholder="search here">
+        </div>
+        
+    </div>
+
+    <div class="container p-2">
+        
+        <div class="table-responsive">
+            <table class="table text-center ">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Status</th>
+                        <th>tracker</th>
+                        <th>Prority</th>
+                        <th>Subject</th>
+                        <th>Description</th>
+                        <th>Assignee</th>
+                        <th>Start Date</th>
+                        <th>Due Date</th>
+                        <th>Estimated Hours</th>
+                        <th>File</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ticket of tickets">
+                        <td><a [routerLink]="['/edit',ticket.id]">{{ ticket.id }}</a></td>
+                        <td>{{ ticket.status }}</td>
+                        <td>{{ ticket.tracker }}</td>
+                        <td> {{ ticket.priority }}</td>
+                        <td>{{ ticket.subject }}</td>
+                        <td>{{ ticket.description }}</td>
+                        <td>{{ ticket.assignee }}</td>
+                        <td>{{ ticket.startDate  }}</td>
+                        <td>{{ ticket.dueDate }}</td>
+                        <td>{{ ticket.estimatedHours }}</td>
+
+                        <td>
+                            No File
+                        </td>
+
+                        <td>
+                        
+
+                            <button class="btn btn-danger btn-sm" (click)="deleteTicket(ticket.id)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="container p-3">
+    <div class="container d-flex justify-content-between align-items-center mb-3" >
+
+        <div class="">
+            <button class="btn btn-secondary" routerLink="/add">Add Ticket</button>
+        </div>
+
+        <div>
+        <input class="form-control" (keyup)="applyFilter($event)" placeholder="Search Here" #input>
+
+        </div>
+        <!-- <mat-form-field>
+            <input matInput class="" (keyup)="applyFilter($event)" placeholder="Search Here" #input>
+        </mat-form-field> -->
+    </div>
+    <div class="table-responsive">
+        <table class="w-75 table-bordered" mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let ticket"> <a [routerLink]="['/edit',ticket.id]">{{ ticket.id }}</a> </td>
+
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tracker">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> tracker </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.tracker}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="priority">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.priority}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="subject">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Subject </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.subject}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="assignee">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Assignee </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.assignee}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="startDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.startDate | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Due Date </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.dueDate | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="updatedDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> UpdatedDate </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.updatedDate | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="progress">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress(%) </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.progress}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estimatedHours">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Estimated Hours </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.estimatedHours}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="file">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> File </th>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.file}} </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let ticket">
+                    <!-- <button class="btn btn-primary btn-sm me-2" [routerLink]="['/edit', ticket.id]">
+                        Edit
+                    </button> -->
+                    <div class="d-flex">
+                        <!-- <button class="btn btn-primary btn-sm me-2" [routerLink]="['/edit', ticket.id]">
+                            <mat-icon>edit</mat-icon>
+                        </button> -->
+
+                        <mat-icon aria-hidden="false" matTooltip="Edit" class="m-1 text-success"
+                            [routerLink]="['/edit', ticket.id]" fontIcon="edit"></mat-icon>
+
+                        <mat-icon aria-hidden="false" matTooltip="Delete" class="m-1 text-danger"
+                            (click)="deleteTicket(ticket.id)" fontIcon="delete"></mat-icon>
+
+                        <!-- <button class="btn btn-danger btn-sm" (click)="deleteTicket(ticket.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button> -->
+
+
+                        <!-- <button class="btn btn-danger btn-sm" (click)="deleteTicket(ticket.id)">
+                            Delete
+                        </button> -->
+                    </div>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="text-center"></tr>
+        </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5,10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+</div>
