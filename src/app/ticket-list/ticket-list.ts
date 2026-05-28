@@ -33,7 +33,7 @@ export class TicketList implements OnInit, AfterViewInit {
     this.loadTickets();
   }
 
-  
+
   loadTickets() {
     this.ticketService.tickets$.subscribe((tickets) => {
       this.tickets = tickets;

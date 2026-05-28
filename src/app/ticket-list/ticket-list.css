@@ -1,6 +1,40 @@
-mat-icon{
+mat-icon {
     cursor: pointer;
 }
-td{
+
+td {
     text-align: center;
+}
+
+.priority-chip {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 16px;
+    color: white;
+    font-size: 12px;
+}
+
+.priority-chip.normal {
+    background-color: green;
+}
+
+.priority-chip.urgent {
+    background-color: orange;
+}
+
+.priority-chip.immediate {
+    background-color: red;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    color: gray;
+    font-size: 20px;
+}
+
+.mat-mdc-row:hover {
+    background: rgb(207, 219, 240);
+    transition: 0.2s;
 }
