@@ -2,6 +2,7 @@
     <form action="" class="" [formGroup]="ticketForm" (ngSubmit)="onSubmit()" autocomplete="off">
         <div class="container bg-dark-subtle p-3 rounded">
 
+            <!-- Tracker and subject section -->
 
             <div class="row">
                 <div class="col-6 col-md-6">
@@ -23,6 +24,9 @@
                                 <div class="text-danger" *ngIf="invalidTracker">
                                     no data found
                                 </div>
+
+                                <!-- validation message for Tracker -->
+
                                 <div class="text-danger"
                                     *ngIf="ticketForm.get('tracker')?.touched && ticketForm.get('tracker')?.invalid">
 
@@ -45,6 +49,9 @@
                                 <input type="text" class="form-control" id="subject" formControlName="subject"
                                     placeholder="Enter Subject">
                             </div>
+
+                                <!-- validation message for Subject -->
+
                             <div class="text-danger"
                                 *ngIf="ticketForm.get('subject')?.touched && ticketForm.get('subject')?.invalid">
 
@@ -70,6 +77,9 @@
                                 <textarea name="" id="description" class="form-control rounded-3" required rows="5"
                                     formControlName="description" placeholder="Enter Description"></textarea>
                             </div>
+
+                                <!-- validation message for Description -->
+
                             <div class="text-danger"
                                 *ngIf="ticketForm.get('description')?.touched && ticketForm.get('description')?.invalid">
 
@@ -104,6 +114,9 @@
                                 <div class="text-danger" *ngIf="invalidStatus">
                                     no data found
                                 </div>
+
+                                <!-- validation message for Status -->
+
                                 <div class="text-danger"
                                     *ngIf="ticketForm.get('status')?.touched && ticketForm.get('status')?.invalid">
 
@@ -125,6 +138,9 @@
                             <div class="col-12">
                                 <input type="date" class="form-control" id="start-date" formControlName="startDate">
                             </div>
+
+                                <!-- validation message for Start Date -->
+
                             <div class="text-danger"
                                 *ngIf="ticketForm.get('startDate')?.touched && ticketForm.get('startDate')?.invalid">
 
@@ -159,6 +175,9 @@
                                 <div class="text-danger" *ngIf="invalidPriority">
                                     no data found
                                 </div>
+
+                                <!-- validation message for Priority -->
+
                                 <div class="text-danger"
                                     *ngIf="ticketForm.get('priority')?.touched && ticketForm.get('priority')?.invalid">
 
@@ -183,6 +202,9 @@
 
                                 <!-- <input type="date" class="form-control" id="due-date" formControlName="dueDate"> -->
                             </div>
+
+                                <!-- validation message for Due Date -->
+
                             <div class="text-danger"
                                 *ngIf="ticketForm.get('dueDate')?.touched && ticketForm.get('dueDate')?.invalid">
 
@@ -227,6 +249,9 @@
 
                                 <!-- <input type="date" class="form-control" id="due-date" formControlName="dueDate"> -->
                             </div>
+
+                                <!-- validation message for Progress(%) -->
+
                             <div class="text-danger"
                                 *ngIf="ticketForm.get('progress')?.touched && ticketForm.get('progress')?.invalid">
 
@@ -239,7 +264,7 @@
                 </div>
             </div>
 
-            <!-- Assignee and Estimated-time section -->
+            <!-- Assignee and Estimated-Hours section -->
 
             <div class="row">
                 <div class="col-6 col-md-6">
@@ -262,6 +287,9 @@
                                 <div class="text-danger" *ngIf="invalidAssignee">
                                     no data found
                                 </div>
+
+                                <!-- validation message for Assignee -->
+
                                 <div class="text-danger"
                                     *ngIf="ticketForm.get('assignee')?.touched && ticketForm.get('assignee')?.invalid">
 
@@ -286,6 +314,9 @@
                                     appEstimatedHoursValidation>
                                 <!-- oninput="this.value=Math.abs(this.value)" -->
                             </div>
+
+                                <!-- validation message for Estimate Hours -->
+
                             <div class="text-danger"
                                 *ngIf="ticketForm.get('estimatedHours')?.touched && ticketForm.get('estimatedHours')?.invalid">
 
