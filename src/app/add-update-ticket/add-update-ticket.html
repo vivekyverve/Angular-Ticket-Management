@@ -23,6 +23,13 @@
                                 <div class="text-danger" *ngIf="invalidTracker">
                                     no data found
                                 </div>
+                                <div class="text-danger"
+                                    *ngIf="ticketForm.get('tracker')?.touched && ticketForm.get('tracker')?.invalid">
+
+                                    <small *ngIf="ticketForm.get('tracker')?.errors?.['required']">
+                                        Tracker is required.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -37,6 +44,13 @@
                             <div class="col-12">
                                 <input type="text" class="form-control" id="subject" formControlName="subject"
                                     placeholder="Enter Subject">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="ticketForm.get('subject')?.touched && ticketForm.get('subject')?.invalid">
+
+                                <small *ngIf="ticketForm.get('subject')?.errors?.['required']">
+                                    Subject is required.
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -55,6 +69,13 @@
                             <div class="col-12">
                                 <textarea name="" id="description" class="form-control rounded-3" required rows="5"
                                     formControlName="description" placeholder="Enter Description"></textarea>
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="ticketForm.get('description')?.touched && ticketForm.get('description')?.invalid">
+
+                                <small *ngIf="ticketForm.get('description')?.errors?.['required']">
+                                    Description is required.
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -83,6 +104,13 @@
                                 <div class="text-danger" *ngIf="invalidStatus">
                                     no data found
                                 </div>
+                                <div class="text-danger"
+                                    *ngIf="ticketForm.get('status')?.touched && ticketForm.get('status')?.invalid">
+
+                                    <small *ngIf="ticketForm.get('status')?.errors?.['required']">
+                                        Status is required.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,6 +124,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <input type="date" class="form-control" id="start-date" formControlName="startDate">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="ticketForm.get('startDate')?.touched && ticketForm.get('startDate')?.invalid">
+
+                                <small *ngIf="ticketForm.get('startDate')?.errors?.['required']">
+                                    Start Date is required.
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -124,6 +159,13 @@
                                 <div class="text-danger" *ngIf="invalidPriority">
                                     no data found
                                 </div>
+                                <div class="text-danger"
+                                    *ngIf="ticketForm.get('priority')?.touched && ticketForm.get('priority')?.invalid">
+
+                                    <small *ngIf="ticketForm.get('priority')?.errors?.['required']">
+                                        Priority is required.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,6 +182,13 @@
                                     [min]="ticketForm.get('startDate')?.value">
 
                                 <!-- <input type="date" class="form-control" id="due-date" formControlName="dueDate"> -->
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="ticketForm.get('dueDate')?.touched && ticketForm.get('dueDate')?.invalid">
+
+                                <small *ngIf="ticketForm.get('dueDate')?.errors?.['required']">
+                                    Due Date is required.
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -178,6 +227,13 @@
 
                                 <!-- <input type="date" class="form-control" id="due-date" formControlName="dueDate"> -->
                             </div>
+                            <div class="text-danger"
+                                *ngIf="ticketForm.get('progress')?.touched && ticketForm.get('progress')?.invalid">
+
+                                <small *ngIf="ticketForm.get('progress')?.errors?.['required']">
+                                    Progress(%) is required.
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -206,6 +262,13 @@
                                 <div class="text-danger" *ngIf="invalidAssignee">
                                     no data found
                                 </div>
+                                <div class="text-danger"
+                                    *ngIf="ticketForm.get('assignee')?.touched && ticketForm.get('assignee')?.invalid">
+
+                                    <small *ngIf="ticketForm.get('assignee')?.errors?.['required']">
+                                        Assignee is required.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -222,6 +285,13 @@
                                     placeholder="Enter Estimated Hours" formControlName="estimatedHours"
                                     appEstimatedHoursValidation>
                                 <!-- oninput="this.value=Math.abs(this.value)" -->
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="ticketForm.get('estimatedHours')?.touched && ticketForm.get('estimatedHours')?.invalid">
+
+                                <small *ngIf="ticketForm.get('estimatedHours')?.errors?.['required']">
+                                    Estimate Hours is required.
+                                </small>
                             </div>
                         </div>
                     </div>

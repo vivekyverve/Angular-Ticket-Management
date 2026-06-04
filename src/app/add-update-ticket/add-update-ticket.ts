@@ -138,6 +138,11 @@ export class AddUpdateTicket implements OnInit {
 
   onSubmit(): void {
 
+    if (this.ticketForm.invalid) {
+      this.ticketForm.markAllAsTouched();
+      return;
+    }
+
     if (this.ticketForm.valid) {
 
       if (this.editId !== null) {
