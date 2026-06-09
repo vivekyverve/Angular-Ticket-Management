@@ -1,354 +1,231 @@
-<div class="container pt-3">
-    <form action="" class="" [formGroup]="ticketForm" (ngSubmit)="onSubmit()" autocomplete="off">
-        <div class="container bg-dark-subtle p-3 rounded">
+<div class="container py-4">
 
-            <!-- Tracker and subject section -->
+    <!-- Page Header -->
 
-            <div class="row">
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="tracker" class="col-md-6 col-form-label">
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+
+        <!-- Ticket Information -->
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">
+                <i class="fa-solid fa-ticket ticket-icon"></i>
+                Ticket Information
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="tracker">
                             Tracker
                         </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input class="form-select" id="tracker" list="tracker-option" formControlName="tracker"
-                                    placeholder="Select tracker" autocomplete="off" (input)="validTracker()">
 
-                                <datalist id="tracker-option">
-                                    <!-- <option value="New Request"></option>
-                                    <option value="Support"></option> -->
-                                    <option *ngFor="let option of trackerOptions" [value]="option"></option>
-                                </datalist>
+                        <input class="form-select" list="tracker-option" id="tracker" formControlName="tracker"
+                            (input)="validTracker()" placeholder="Select Tracker">
 
-                                <div class="text-danger" *ngIf="invalidTracker">
-                                    no data found
-                                </div>
+                        <datalist id="tracker-option">
+                            <option *ngFor="let option of trackerOptions" [value]="option">
+                            </option>
+                        </datalist>
 
-                                <!-- validation message for Tracker -->
-
-                                <div class="text-danger"
-                                    *ngIf="ticketForm.get('tracker')?.touched && ticketForm.get('tracker')?.invalid">
-
-                                    <small *ngIf="ticketForm.get('tracker')?.errors?.['required']">
-                                        Tracker is required.
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
+                        <small class="text-danger" *ngIf="ticketForm.get('tracker')?.touched &&
+                                   ticketForm.get('tracker')?.invalid">
+                            Tracker is required
+                        </small>
                     </div>
-                </div>
 
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="subject" class="col-md-6 col-form-label">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="subject">
                             Subject
                         </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input type="text" class="form-control" id="subject" formControlName="subject"
-                                    placeholder="Enter Subject">
-                            </div>
 
-                            <!-- validation message for Subject -->
+                        <input type="text" class="form-control" formControlName="subject" id="subject"
+                            placeholder="Enter Subject">
 
-                            <div class="text-danger"
-                                *ngIf="ticketForm.get('subject')?.touched && ticketForm.get('subject')?.invalid">
-
-                                <small *ngIf="ticketForm.get('subject')?.errors?.['required']">
-                                    Subject is required.
-                                </small>
-                            </div>
-                        </div>
+                        <small class="text-danger" *ngIf="ticketForm.get('subject')?.touched &&
+                                   ticketForm.get('subject')?.invalid">
+                            Subject is required
+                        </small>
                     </div>
                 </div>
-            </div>
+                <div>
 
-            <!-- Description section -->
+                    <label class="form-label" for="description">
+                        Description
+                    </label>
 
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <div class="row mb-3">
-                        <label for="description" class="col-md-12 col-form-label">
-                            Description
-                        </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <textarea name="" id="description" class="form-control rounded-3" required rows="5"
-                                    formControlName="description" placeholder="Enter Description"></textarea>
-                            </div>
+                    <textarea rows="5" class="form-control" id="description" formControlName="description"
+                        placeholder="Enter Description">
+                    </textarea>
 
-                            <!-- validation message for Description -->
-
-                            <div class="text-danger"
-                                *ngIf="ticketForm.get('description')?.touched && ticketForm.get('description')?.invalid">
-
-                                <small *ngIf="ticketForm.get('description')?.errors?.['required']">
-                                    Description is required.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
+                    <small class="text-danger" *ngIf="ticketForm.get('description')?.touched &&
+                               ticketForm.get('description')?.invalid">
+                        Description is required
+                    </small>
                 </div>
             </div>
+        </div>
 
-            <!-- status and start-date section -->
+        <!-- Assignment -->
 
-            <div class="row">
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="status" class="col-md-6 col-form-label">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">
+                <i class="fa-solid fa-user"></i>
+                Assignment & Priority
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="status">
                             Status
                         </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input class="form-select" list="status-option" (input)="validStatus()"
-                                    formControlName="status" placeholder="Select Status" autocomplete="off">
-                                <datalist id="status-option">
-                                    <!-- <option value="New"></option>
-                                    <option value="In Progress"></option>
-                                    <option value="Resolved"></option> -->
-                                    <option *ngFor="let option of statusOptions" [value]="option"></option>
 
-                                </datalist>
-                                <div class="text-danger" *ngIf="invalidStatus">
-                                    no data found
-                                </div>
+                        <input class="form-select" list="status-option" id="status" formControlName="status"
+                            (input)="validStatus()" placeholder="Select Status">
 
-                                <!-- validation message for Status -->
+                        <datalist id="status-option">
+                            <option *ngFor="let option of statusOptions" [value]="option">
+                            </option>
+                        </datalist>
 
-                                <div class="text-danger"
-                                    *ngIf="ticketForm.get('status')?.touched && ticketForm.get('status')?.invalid">
-
-                                    <small *ngIf="ticketForm.get('status')?.errors?.['required']">
-                                        Status is required.
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
+                        <small class="text-danger" *ngIf="ticketForm.get('status')?.touched &&
+                                   ticketForm.get('status')?.invalid">
+                            Status is required
+                        </small>
                     </div>
-                </div>
 
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="start-date" class="col-md-6 col-form-label">
-                            Start Date
-                        </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input type="date" class="form-control" id="start-date" formControlName="startDate">
-                            </div>
-
-                            <!-- validation message for Start Date -->
-
-                            <div class="text-danger"
-                                *ngIf="ticketForm.get('startDate')?.touched && ticketForm.get('startDate')?.invalid">
-
-                                <small *ngIf="ticketForm.get('startDate')?.errors?.['required']">
-                                    Start Date is required.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Priority and Due-Date section -->
-
-            <div class="row">
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="priority" class="col-md-6 col-form-label">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="priority">
                             Priority
                         </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input class="form-select" list="priority-option" id="priority"
-                                    (input)="validPriority()" formControlName="priority" placeholder="Select Priority">
-                                <datalist id="priority-option">
-                                    <!-- <option value="Normal"></option>
-                                    <option value="Urgent"></option>
-                                    <option value="Immediate"></option> -->
-                                    <option *ngFor="let option of priorityOptions" [value]="option"></option>
 
-                                </datalist>
-                                <div class="text-danger" *ngIf="invalidPriority">
-                                    no data found
-                                </div>
+                        <input class="form-select" list="priority-option" id="priority" formControlName="priority"
+                            (input)="validPriority()" placeholder="Select Priority">
 
-                                <!-- validation message for Priority -->
+                        <datalist id="priority-option">
+                            <option *ngFor="let option of priorityOptions" [value]="option">
+                            </option>
+                        </datalist>
 
-                                <div class="text-danger"
-                                    *ngIf="ticketForm.get('priority')?.touched && ticketForm.get('priority')?.invalid">
-
-                                    <small *ngIf="ticketForm.get('priority')?.errors?.['required']">
-                                        Priority is required.
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
+                        <small class="text-danger" *ngIf="ticketForm.get('priority')?.touched &&
+                                   ticketForm.get('priority')?.invalid">
+                            Priority is required
+                        </small>
                     </div>
-                </div>
 
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="due-date" class="col-md-6 col-form-label">
-                            Due Date
-                        </label>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input type="date" class="form-control" id="due-date" formControlName="dueDate"
-                                    [min]="ticketForm.get('startDate')?.value">
-
-                                <!-- <input type="date" class="form-control" id="due-date" formControlName="dueDate"> -->
-                            </div>
-
-                            <!-- validation message for Due Date -->
-
-                            <div class="text-danger"
-                                *ngIf="ticketForm.get('dueDate')?.touched && ticketForm.get('dueDate')?.invalid">
-
-                                <small *ngIf="ticketForm.get('dueDate')?.errors?.['required']">
-                                    Due Date is required.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- updated date and progress -->
-
-            <div class="row">
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="updatedDate" class="col-md-6 col-form-label">
-                            Updated Date
-                        </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input type="date" class="form-control" id="updatedDate" formControlName="updatedDate"
-                                    [min]="ticketForm.get('startDate')?.value">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="progress" class="col-md-6 col-form-label">
-                            Progress(%)
-                        </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input type="number" class="form-control" id="progress" formControlName="progress"
-                                    placeholder="Enter Your Progress(%)" appPercentageValidation>
-
-                                <!-- oninput="this.value=Math.min(100, Math.max(0, Math.abs(this.value)))" -->
-
-
-                                <!-- <input type="date" class="form-control" id="due-date" formControlName="dueDate"> -->
-                            </div>
-
-                            <!-- validation message for Progress(%) -->
-
-                            <div class="text-danger"
-                                *ngIf="ticketForm.get('progress')?.touched && ticketForm.get('progress')?.invalid">
-
-                                <small *ngIf="ticketForm.get('progress')?.errors?.['required']">
-                                    Progress(%) is required.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Assignee and Estimated-Hours section -->
-
-            <div class="row">
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="assignee" class="col-md-6 col-form-label">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="assignee">
                             Assignee
                         </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input class="form-select" list="assignee-option" id="assignee"
-                                    (input)="validAssignee()" formControlName="assignee" placeholder="Select Assignee">
-                                <datalist id="assignee-option">
-                                    <!-- <option value="Vivek"></option>
-                                    <option value="Shivanshu"></option>
-                                    <option value="Anuj"></option> -->
-                                    <option *ngFor="let option of assigneeOption" [value]="option"></option>
 
+                        <input class="form-select" list="assignee-option" id="assignee" formControlName="assignee"
+                            (input)="validAssignee()" placeholder="Select Assignee">
 
-                                </datalist>
-                                <div class="text-danger" *ngIf="invalidAssignee">
-                                    no data found
-                                </div>
-
-                                <!-- validation message for Assignee -->
-
-                                <div class="text-danger"
-                                    *ngIf="ticketForm.get('assignee')?.touched && ticketForm.get('assignee')?.invalid">
-
-                                    <small *ngIf="ticketForm.get('assignee')?.errors?.['required']">
-                                        Assignee is required.
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-6">
-                    <div class="row mb-3">
-                        <label for="estimated-hours" class="col-md-6 col-form-label">
-                            Estimate Hours
-                        </label>
-                        <div class="row">
-                            <div class="col-12">
-                                <input type="number" class="form-control" id="estimated-hours" min="0"
-                                    placeholder="Enter Estimated Hours" formControlName="estimatedHours"
-                                    appEstimatedHoursValidation>
-                                <!-- oninput="this.value=Math.abs(this.value)" -->
-                            </div>
-
-                            <!-- validation message for Estimate Hours -->
-
-                            <div class="text-danger"
-                                *ngIf="ticketForm.get('estimatedHours')?.touched && ticketForm.get('estimatedHours')?.invalid">
-
-                                <small *ngIf="ticketForm.get('estimatedHours')?.errors?.['required']">
-                                    Estimate Hours is required.
-                                </small>
-                            </div>
-                        </div>
+                        <datalist id="assignee-option">
+                            <option *ngFor="let option of assigneeOption" [value]="option">
+                            </option>
+                        </datalist>
+                        <small class="text-danger" *ngIf="ticketForm.get('assignee')?.touched &&
+                                   ticketForm.get('assignee')?.invalid">
+                            Assignee is required
+                        </small>
                     </div>
                 </div>
             </div>
-
-
-
-
-            <!-- <div class="row mb-2">
-                <label for="file-upload" class="col-2 form-label">
-                    File:
-                </label>
-                <div class="col-3">
-                    <input type="file" class="form-control" id="file-upload" required formControlName="file">
-                </div>
-            </div> -->
-
         </div>
-        <div class="mt-3">
-            <button class="btn btn-primary" type="submit">
-                {{editId ? 'Update Ticket' : 'Save Ticket'}}
-                <!-- Save Ticket -->
+
+        <!-- Timeline -->
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">
+                <i class="fa-solid fa-calendar-days"></i>
+                Timeline
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="startDate">
+                            Start Date
+                        </label>
+
+                        <input type="date" class="form-control" id="startDate" formControlName="startDate">
+
+                        <small class="text-danger" *ngIf="ticketForm.get('startDate')?.touched &&
+                                   ticketForm.get('startDate')?.invalid">
+                            Start Date is required
+                        </small>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="dueDate">
+                            Due Date
+                        </label>
+
+                        <input type="date" class="form-control" id="dueDate" formControlName="dueDate"
+                            [min]="ticketForm.get('startDate')?.value">
+
+                        <small class="text-danger" *ngIf="ticketForm.get('dueDate')?.touched &&
+                                   ticketForm.get('dueDate')?.invalid">
+                            Due Date is required
+                        </small>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label" for="updatedDate">
+                            Updated Date
+                        </label>
+                        <input type="date" class="form-control" id="updatedDate" formControlName="updatedDate"
+                            [min]="ticketForm.get('startDate')?.value">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress -->
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header fw-bold">
+                <i class="fa-solid fa-chart-bar"></i>
+                Progress & Estimation
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="progress">
+                            Progress (%)
+                        </label>
+
+                        <input type="number" class="form-control" id="progress" formControlName="progress"
+                            appPercentageValidation>
+
+                        <small class="text-danger" *ngIf="ticketForm.get('progress')?.touched &&
+                                   ticketForm.get('progress')?.invalid">
+                            Progress is required
+                        </small>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="estimstedHours">
+                            Estimated Hours
+                        </label>
+
+                        <input type="number" class="form-control" id="estimstedHours" formControlName="estimatedHours"
+                            appEstimatedHoursValidation>
+
+                        <small class="text-danger" *ngIf="ticketForm.get('estimatedHours')?.touched &&
+                                   ticketForm.get('estimatedHours')?.invalid">
+                            Estimated Hours is required
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sticky-footer">
+            <button type="submit" class="btn btn-primary">
+                {{ editId ? 'Update Ticket' : 'Create Ticket' }}
             </button>
         </div>
-
     </form>
-
 </div>
