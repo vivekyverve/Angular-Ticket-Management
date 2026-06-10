@@ -62,6 +62,7 @@ export class TicketList implements OnInit, AfterViewInit {
   // }
 
   deleteTicket(id: number): void {
+
     this.ticketService.deleteTicket(id);
 
     console.log('Tickets is Deleted from the Local-Storage');

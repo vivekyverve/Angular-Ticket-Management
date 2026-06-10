@@ -2,7 +2,7 @@
 
     <!-- Page Header -->
 
-    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
         <!-- Ticket Information -->
 
@@ -19,7 +19,7 @@
                             Tracker
                         </label>
 
-                        <input class="form-select" list="tracker-option" id="tracker" formControlName="tracker"
+                        <input type="text" class="form-select" list="tracker-option" id="tracker" formControlName="tracker"
                             (input)="validTracker()" placeholder="Select Tracker">
 
                         <datalist id="tracker-option">

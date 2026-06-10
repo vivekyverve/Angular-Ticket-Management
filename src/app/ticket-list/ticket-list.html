@@ -75,7 +75,7 @@
             <div class="position-relative">
                 <mat-icon class="search-icon">search</mat-icon>
 
-                <input class="form-control ps-5" (keyup)="applyFilter($event)" placeholder="Search Here">
+                <input type="text" class="form-control ps-5" (keyup)="applyFilter($event)" placeholder="Search Here">
             </div>
 
         </div>
@@ -107,7 +107,7 @@
             </ng-container>
 
             <ng-container matColumnDef="tracker">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> tracker </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tracker </th>
                 <td mat-cell *matCellDef="let ticket"> {{ticket.tracker}} </td>
             </ng-container>
 
@@ -154,7 +154,7 @@
 
             <ng-container matColumnDef="progress">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress(%) </th>
-                <td mat-cell *matCellDef="let ticket"> {{ticket.progress}} </td>
+                <td mat-cell *matCellDef="let ticket"> {{ticket.progress}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="estimatedHours">
@@ -181,9 +181,31 @@
                         <mat-icon aria-hidden="false" matTooltip="Edit" class="m-1 text-success"
                             [routerLink]="['/edit', ticket.id]" fontIcon="edit"></mat-icon>
 
-                        <mat-icon aria-hidden="false" matTooltip="Delete" class="m-1 text-danger"
-                            (click)="deleteTicket(ticket.id)" fontIcon="delete"></mat-icon>
+                        <mat-icon aria-hidden="false" matTooltip="Delete" class="m-1 text-danger" fontIcon="delete"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal"></mat-icon>
 
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Confirmation</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this ticket? This action cannot be undone.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                            (click)="deleteTicket(ticket.id)">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- <button class="btn btn-danger btn-sm" (click)="deleteTicket(ticket.id)">
                             <mat-icon>delete</mat-icon>
                         </button> -->
@@ -201,7 +223,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>
-
     <mat-paginator [pageSizeOptions]="paginatorOptions" aria-label="Select page of users"></mat-paginator>
 
 </div>
