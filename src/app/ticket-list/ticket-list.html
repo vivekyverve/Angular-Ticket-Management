@@ -182,30 +182,10 @@
                             [routerLink]="['/edit', ticket.id]" fontIcon="edit"></mat-icon>
 
                         <mat-icon aria-hidden="false" matTooltip="Delete" class="m-1 text-danger" fontIcon="delete"
-                            data-bs-toggle="modal" data-bs-target="#exampleModal"></mat-icon>
+                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            (click)="openDeleteModal(ticket.id)"></mat-icon>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Confirmation</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete this ticket? This action cannot be undone.
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                            (click)="deleteTicket(ticket.id)">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <!-- <button class="btn btn-danger btn-sm" (click)="deleteTicket(ticket.id)">
                             <mat-icon>delete</mat-icon>
                         </button> -->
@@ -222,6 +202,26 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Confirmation</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this ticket? This action cannot be undone.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                            (click)="confirmDelete()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <mat-paginator [pageSizeOptions]="paginatorOptions" aria-label="Select page of users"></mat-paginator>
 

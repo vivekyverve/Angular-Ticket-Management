@@ -27,6 +27,8 @@ export class TicketList implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<TicketValue>(this.tickets);
 
+  selectedTicketId!: number;
+
   constructor(private ticketService: Ticket) { }
 
   ngOnInit(): void {
@@ -56,23 +58,21 @@ export class TicketList implements OnInit, AfterViewInit {
     }
   }
 
-  // loadTickets(): void {
-  //   this.tickets = JSON.parse(localStorage.getItem('tickets') || '[]');
-  //   this.dataSource.data = this.tickets;
-  // }
-
   deleteTicket(id: number): void {
 
     this.ticketService.deleteTicket(id);
 
     console.log('Tickets is Deleted from the Local-Storage');
+  }
 
+  openDeleteModal(id: number): void {
+    this.selectedTicketId = id;
+  }
 
-    // this.tickets = this.tickets.filter((ticket) => ticket.id !== id);
-
-    // this.dataSource.data = this.tickets;
-
-    // localStorage.setItem('tickets', JSON.stringify(this.tickets));
+  confirmDelete(): void {
+    if (this.selectedTicketId) {
+      this.deleteTicket(this.selectedTicketId);
+    }
   }
 }
 
