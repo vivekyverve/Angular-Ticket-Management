@@ -100,7 +100,7 @@
                             (input)="validStatus()" placeholder="Select Status">
 
                         <datalist id="status-option">
-                            <option *ngFor="let option of statusOptions" [value]="option">
+                            <option *ngFor="let status of statusOptions" [value]="status.name">
                             </option>
                         </datalist>
 
@@ -127,7 +127,7 @@
                             formControlName="priority" (input)="validPriority()" placeholder="Select Priority">
 
                         <datalist id="priority-option">
-                            <option *ngFor="let option of priorityOptions" [value]="option">
+                            <option *ngFor="let priority of priorityOptions" [value]="priority.name">
                             </option>
                         </datalist>
 
@@ -154,7 +154,7 @@
                             formControlName="assignee" (input)="validAssignee()" placeholder="Select Assignee">
 
                         <datalist id="assignee-option">
-                            <option *ngFor="let option of assigneeOption" [value]="option">
+                            <option *ngFor="let assignee of assigneeOption" [value]="assignee.name">
                             </option>
                         </datalist>
 
@@ -288,8 +288,8 @@
                     <div class="list-group">
 
                         <option class="list-group-item list-group-item-action" *ngFor="let tracker of trackerOptions"
-                            (click)="selectTracker(tracker)">
-                            {{ tracker}}
+                            (click)="selectTracker(tracker.name)">
+                            {{ tracker.name}}
                         </option>
 
                     </div>

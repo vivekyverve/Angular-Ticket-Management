@@ -33,10 +33,36 @@ export class AddUpdateTicket implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private activeRoute: ActivatedRoute, private ticketService: Ticket) { }
 
-  trackerOptions: string[] = ['New Request', 'Support'];
-  statusOptions: string[] = ['New', 'In Progress', 'Resolved'];
-  priorityOptions: string[] = ['Normal', 'Urgent', 'Immediate'];
-  assigneeOption: string[] = ['Vivek', 'Shivanshu', 'Anuj'];
+  // trackerOptions: string[] = ['New Request', 'Support'];
+
+  trackerOptions: any[] = [
+    { id: 1, name: 'New Request' },
+    { id: 2, name: 'Support' }
+  ];
+
+  // statusOptions: string[] = ['New', 'In Progress', 'Resolved'];
+
+  statusOptions: any[] = [
+    { id: 1, name: 'New' },
+    { id: 2, name: 'In Progress' },
+    { id: 3, name: 'Resolved' }
+  ];
+
+  // priorityOptions: string[] = ['Normal', 'Urgent', 'Immediate'];
+
+  priorityOptions: any[] = [
+    { id: 1, name: 'Normal' },
+    { id: 2, name: 'Urgent' },
+    { id: 3, name: 'Immediate' }
+  ];
+
+  // assigneeOption: string[] = ['Vivek', 'Shivanshu', 'Anuj'];
+
+  assigneeOption: any[] = [
+    { id: 1, name: 'Vivek' },
+    { id: 2, name: 'Shivanshu' },
+    { id: 3, name: 'Anuj' },
+  ];
 
   // THIS FUNCTION IS FOR VALIDATING TRACKER
 
@@ -97,7 +123,7 @@ export class AddUpdateTicket implements OnInit {
 
   // THIS FUNCTION IS FOR SELECTING TRACKER IN MODEL
 
-  selectTracker(tracker: string){
+  selectTracker(tracker: string) {
     this.ticketForm.patchValue({
       tracker: tracker
     });
