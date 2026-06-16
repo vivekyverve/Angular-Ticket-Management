@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,15 +6,21 @@ import { TicketValue } from '../Interfaces/ticket-value';
 import { Ticket } from '../Services/ticket';
 import { EstimatedHoursValidation } from '../Directives/estimated-hours-validation';
 import { PercentageValidation } from '../Directives/percentage-validation';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap/modal';
+
 
 @Component({
   selector: 'app-add-update-ticket',
-  imports: [CommonModule, ReactiveFormsModule, EstimatedHoursValidation, PercentageValidation],
+  imports: [CommonModule, ReactiveFormsModule, EstimatedHoursValidation, PercentageValidation,],
   templateUrl: './add-update-ticket.html',
   styleUrl: './add-update-ticket.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AddUpdateTicket implements OnInit {
   ticketForm!: FormGroup;
+
+  // private modalService = inject(NgbModal);
+
 
   editId: number | null = null;
 
@@ -31,7 +37,11 @@ export class AddUpdateTicket implements OnInit {
   allowedAssignee = ['Vivek', 'Shivanshu', 'Anuj'];
 
 
-  constructor(private fb: FormBuilder, private router: Router, private activeRoute: ActivatedRoute, private ticketService: Ticket) { }
+  constructor(private fb: FormBuilder, private router: Router, private activeRoute: ActivatedRoute, private ticketService: Ticket, config: NgbModalConfig,
+    private modalService: NgbModal,) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   // trackerOptions: string[] = ['New Request', 'Support'];
 
@@ -130,7 +140,27 @@ export class AddUpdateTicket implements OnInit {
   }
 
 
+  openModel(content: TemplateRef<any>) {
+    this.modalService.open(content);
+  }
+
   ngOnInit(): void {
+    this.loadForm();
+
+    const id = this.activeRoute.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.editId = +id;
+
+      const ticket = this.ticketService.getTicketById(this.editId);
+
+      if (ticket) {
+        this.ticketForm.patchValue(ticket);
+      }
+    }
+  }
+
+  loadForm() {
     this.ticketForm = this.fb.group({
       tracker: ['', Validators.required],
       subject: ['', Validators.required],
@@ -144,18 +174,6 @@ export class AddUpdateTicket implements OnInit {
       progress: ['', Validators.required],
       estimatedHours: ['', Validators.required],
     });
-
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-
-    if (id) {
-      this.editId = +id;
-
-      const ticket = this.ticketService.getTicketById(this.editId);
-
-      if (ticket) {
-        this.ticketForm.patchValue(ticket);
-      }
-    }
   }
 
   onSubmit(): void {
@@ -193,5 +211,9 @@ export class AddUpdateTicket implements OnInit {
       }
       this.router.navigate(['/'])
     }
+  }
+
+  openModal() {
+
   }
 }

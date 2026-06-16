@@ -14,7 +14,7 @@
 
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-5 mb-3">
                         <label class="form-label" for="tracker">
                             Tracker
                         </label>
@@ -24,9 +24,9 @@
                             data-bs-toggle="modal" data-bs-target="#trackerModel"> -->
 
                         <input type="text" class="form-control" readonly list="tracker-option" id="tracker"
-                            formControlName="tracker" placeholder="Select Tracker" data-bs-toggle="modal"
-                            data-bs-target="#trackerModel">
+                            formControlName="tracker" placeholder="Select Tracker" (click)="openModel(content)">
 
+                            
                         <!-- <datalist id="tracker-option">
                             <option *ngFor="let option of trackerOptions" [value]="option">
                             </option>
@@ -45,6 +45,11 @@
                             Tracker is required
                         </small>
                     </div>
+
+                    <div class="col-md-1 d-flex align-items-end mb-3">
+                        <button type="button" class="btn btn-primary" (click)="openModel(content)">...</button>
+                    </div>
+                   
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label" for="subject">
@@ -276,29 +281,24 @@
         </div>
     </form>
 
-    <!-- Modal -->
-    <div class="modal fade" id="trackerModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Select Tracker</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="list-group">
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Select Tracker!</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
 
-                        <option class="list-group-item list-group-item-action" *ngFor="let tracker of trackerOptions"
-                            (click)="selectTracker(tracker.name)">
-                            {{ tracker.name}}
-                        </option>
+                <option class="list-group-item list-group-item-action" *ngFor="let tracker of trackerOptions"
+                    (click)="selectTracker(tracker.name)">
+                    {{ tracker.name}}
+                </option>
 
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">done</button> -->
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save Tracker</button>
-                </div>
             </div>
         </div>
-    </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="c('Save click')">Save</button>
+        </div>
+    </ng-template>
+
 </div>
