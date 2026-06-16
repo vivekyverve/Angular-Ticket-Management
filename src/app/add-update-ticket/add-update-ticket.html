@@ -19,13 +19,26 @@
                             Tracker
                         </label>
 
-                        <input type="text" class="form-select" list="tracker-option" id="tracker" formControlName="tracker"
-                            (input)="validTracker()" placeholder="Select Tracker">
+                        <!-- <input type="text" class="form-control" readonly list="tracker-option" id="tracker"
+                            formControlName="tracker" (input)="validTracker()" placeholder="Select Tracker"
+                            data-bs-toggle="modal" data-bs-target="#trackerModel"> -->
 
-                        <datalist id="tracker-option">
+                        <input type="text" class="form-control" readonly list="tracker-option" id="tracker"
+                            formControlName="tracker" placeholder="Select Tracker" data-bs-toggle="modal"
+                            data-bs-target="#trackerModel">
+
+                        <!-- <datalist id="tracker-option">
                             <option *ngFor="let option of trackerOptions" [value]="option">
                             </option>
-                        </datalist>
+                        </datalist> -->
+
+                        <!-- OPTION VALIDATION MESSAGE FOR TRACKER -->
+
+                        <!-- <small class="text-danger" *ngIf="invalidTracker">
+                            No Data Found
+                        </small> -->
+
+                        <!-- VALIDATION MESSAGE FOR TRACKER -->
 
                         <small class="text-danger" *ngIf="ticketForm.get('tracker')?.touched &&
                                    ticketForm.get('tracker')?.invalid">
@@ -40,6 +53,8 @@
 
                         <input type="text" class="form-control" formControlName="subject" id="subject"
                             placeholder="Enter Subject">
+
+                        <!-- VALIDATION MESSAGE FOR SUBJECT -->
 
                         <small class="text-danger" *ngIf="ticketForm.get('subject')?.touched &&
                                    ticketForm.get('subject')?.invalid">
@@ -56,6 +71,8 @@
                     <textarea rows="5" class="form-control" id="description" formControlName="description"
                         placeholder="Enter Description">
                     </textarea>
+
+                    <!-- VALIDATION MESSAGE FOR DESCRIPTION -->
 
                     <small class="text-danger" *ngIf="ticketForm.get('description')?.touched &&
                                ticketForm.get('description')?.invalid">
@@ -87,6 +104,14 @@
                             </option>
                         </datalist>
 
+                        <!-- OPTION VALIDATION MESSAGE FOR STATUS -->
+
+                        <small class="text-danger" *ngIf="invalidStatus">
+                            No Data Found
+                        </small>
+
+                        <!-- VALIDATION MESSAGE FOR STATUS -->
+
                         <small class="text-danger" *ngIf="ticketForm.get('status')?.touched &&
                                    ticketForm.get('status')?.invalid">
                             Status is required
@@ -98,13 +123,21 @@
                             Priority
                         </label>
 
-                        <input type="text" class="form-select" list="priority-option" id="priority" formControlName="priority"
-                            (input)="validPriority()" placeholder="Select Priority">
+                        <input type="text" class="form-select" list="priority-option" id="priority"
+                            formControlName="priority" (input)="validPriority()" placeholder="Select Priority">
 
                         <datalist id="priority-option">
                             <option *ngFor="let option of priorityOptions" [value]="option">
                             </option>
                         </datalist>
+
+                        <!-- OPTION VALIDATION MESSAGE FOR PRIORITY -->
+
+                        <small class="text-danger" *ngIf="invalidPriority">
+                            No Data Found
+                        </small>
+
+                        <!-- VALIDATION MESSAGE FOR PRIORITY -->
 
                         <small class="text-danger" *ngIf="ticketForm.get('priority')?.touched &&
                                    ticketForm.get('priority')?.invalid">
@@ -117,13 +150,22 @@
                             Assignee
                         </label>
 
-                        <input type="text" class="form-select" list="assignee-option" id="assignee" formControlName="assignee"
-                            (input)="validAssignee()" placeholder="Select Assignee">
+                        <input type="text" class="form-select" list="assignee-option" id="assignee"
+                            formControlName="assignee" (input)="validAssignee()" placeholder="Select Assignee">
 
                         <datalist id="assignee-option">
                             <option *ngFor="let option of assigneeOption" [value]="option">
                             </option>
                         </datalist>
+
+                        <!-- OPTION VALIDATION MESSAGE FOR ASSIGNEE -->
+
+                        <small class="text-danger" *ngIf="invalidAssignee">
+                            No Data Found
+                        </small>
+
+                        <!-- VALIDATION MESSAGE FOR ASSIGNEE -->
+
                         <small class="text-danger" *ngIf="ticketForm.get('assignee')?.touched &&
                                    ticketForm.get('assignee')?.invalid">
                             Assignee is required
@@ -150,6 +192,8 @@
 
                         <input type="date" class="form-control" id="startDate" formControlName="startDate">
 
+                        <!-- VALIDATION MESSAGE FOR START-DATE -->
+
                         <small class="text-danger" *ngIf="ticketForm.get('startDate')?.touched &&
                                    ticketForm.get('startDate')?.invalid">
                             Start Date is required
@@ -163,6 +207,9 @@
 
                         <input type="date" class="form-control" id="dueDate" formControlName="dueDate"
                             [min]="ticketForm.get('startDate')?.value">
+
+                        <!-- VALIDATION MESSAGE FOR DUE-DATE -->
+
 
                         <small class="text-danger" *ngIf="ticketForm.get('dueDate')?.touched &&
                                    ticketForm.get('dueDate')?.invalid">
@@ -228,4 +275,30 @@
             </button>
         </div>
     </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="trackerModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Select Tracker</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+
+                        <option class="list-group-item list-group-item-action" *ngFor="let tracker of trackerOptions"
+                            (click)="selectTracker(tracker)">
+                            {{ tracker}}
+                        </option>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">done</button> -->
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save Tracker</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

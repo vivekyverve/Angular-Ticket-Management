@@ -91,9 +91,18 @@ export class AddUpdateTicket implements OnInit {
     if (this.invalidAssignee) {
       this.ticketForm.get('assignee')?.setErrors({ invalid: true });
     } else {
-      this.ticketForm.get('assignee')?.setErrors(null)
+      this.ticketForm.get('assignee')?.setErrors(null);
     }
   }
+
+  // THIS FUNCTION IS FOR SELECTING TRACKER IN MODEL
+
+  selectTracker(tracker: string){
+    this.ticketForm.patchValue({
+      tracker: tracker
+    });
+  }
+
 
   ngOnInit(): void {
     this.ticketForm = this.fb.group({
@@ -108,7 +117,6 @@ export class AddUpdateTicket implements OnInit {
       updatedDate: [],
       progress: ['', Validators.required],
       estimatedHours: ['', Validators.required],
-      // file: ['', Validators.required]
     });
 
     const id = this.activeRoute.snapshot.paramMap.get('id');
@@ -121,18 +129,6 @@ export class AddUpdateTicket implements OnInit {
       if (ticket) {
         this.ticketForm.patchValue(ticket);
       }
-
-
-
-      // const tickets: TicketValue[] = JSON.parse(
-      //   localStorage.getItem('tickets') || '[]'
-      // );
-
-      // const ticket = tickets.find((t) => t.id === this.editId);
-
-      // if (ticket) {
-      //   this.ticketForm.patchValue(ticket);
-      // }
     }
   }
 
@@ -171,28 +167,5 @@ export class AddUpdateTicket implements OnInit {
       }
       this.router.navigate(['/'])
     }
-
-    // if (this.ticketForm.valid) { 
-    //   const tickets: TicketValue[] = JSON.parse(localStorage.getItem('tickets') || '[]');
-
-    //   if (this.editId !== null) { 
-    //     const index = tickets.findIndex((t) => t.id === this.editId);
-
-    //     tickets[index] = {
-    //       id: this.editId,
-    //       ...this.ticketForm.value,
-    //     };
-    //   } else {
-    //     const newTicket: TicketValue = { 
-    //       id: new Date().getTime(), ...this.ticketForm.value,
-    //     };
-
-    //     tickets.push(newTicket);
-    //   }
-
-    //   localStorage.setItem('tickets', JSON.stringify(tickets));
-
-    //   this.router.navigate(['/']);
-    // } 
   }
 }
