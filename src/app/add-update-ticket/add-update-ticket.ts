@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TicketValue } from '../Interfaces/ticket-value';
 import { Ticket } from '../Services/ticket';
 import { EstimatedHoursValidation } from '../Directives/estimated-hours-validation';
@@ -11,16 +11,13 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap/modal';
 
 @Component({
   selector: 'app-add-update-ticket',
-  imports: [CommonModule, ReactiveFormsModule, EstimatedHoursValidation, PercentageValidation,],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, EstimatedHoursValidation, PercentageValidation,],
   templateUrl: './add-update-ticket.html',
   styleUrl: './add-update-ticket.css',
   encapsulation: ViewEncapsulation.None,
 })
 export class AddUpdateTicket implements OnInit {
   ticketForm!: FormGroup;
-
-  // private modalService = inject(NgbModal);
-
 
   editId: number | null = null;
 
@@ -141,7 +138,9 @@ export class AddUpdateTicket implements OnInit {
 
 
   openModel(content: TemplateRef<any>) {
-    this.modalService.open(content);
+    this.modalService.open(content, { centered: true });
+
+    console.log('NG-Bootstrap Model is open for Tracker field');
   }
 
   ngOnInit(): void {
@@ -174,6 +173,9 @@ export class AddUpdateTicket implements OnInit {
       progress: ['', Validators.required],
       estimatedHours: ['', Validators.required],
     });
+
+    console.log('Ticket creation form is loaded successfully');
+
   }
 
   onSubmit(): void {
@@ -196,7 +198,6 @@ export class AddUpdateTicket implements OnInit {
 
         console.log('Tickets is Updated Successfully');
 
-
       } else {
         const newTicket: TicketValue = {
 
@@ -206,14 +207,10 @@ export class AddUpdateTicket implements OnInit {
 
         this.ticketService.addTicket(newTicket);
 
-        console.log('Tickets is added Successfully');
+        console.log('New Tickets is added Successfully');
 
       }
       this.router.navigate(['/'])
     }
-  }
-
-  openModal() {
-
   }
 }

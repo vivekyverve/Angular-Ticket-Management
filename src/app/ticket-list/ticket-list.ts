@@ -47,6 +47,7 @@ export class TicketList implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    console.log('Paginatorand sorting functionality are loaded Successfully');
   }
 
   applyFilter(event: Event) {
@@ -67,11 +68,15 @@ export class TicketList implements OnInit, AfterViewInit {
 
   openDeleteModal(id: number): void {
     this.selectedTicketId = id;
+
+    console.log('Bootstrap Model for deleting ticket is open');
   }
 
   confirmDelete(): void {
     if (this.selectedTicketId) {
       this.deleteTicket(this.selectedTicketId);
+
+      console.log('Ticket is delete through the Bootstrap Model');
     }
   }
 }
