@@ -73,7 +73,7 @@ export class TicketList implements OnInit, AfterViewInit {
   }
 
   confirmDelete(): void {
-    if (this.selectedTicketId) {
+    if (this.selectedTicketId != null) {
       this.deleteTicket(this.selectedTicketId);
 
       console.log('Ticket is delete through the Bootstrap Model');

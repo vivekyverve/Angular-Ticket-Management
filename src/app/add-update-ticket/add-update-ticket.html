@@ -4,10 +4,19 @@
 
     <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
+        <div class="row mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <h6>
+                    Add Ticket
+                </h6>
+                <button class="btn btn-primary" routerLink="/">Back</button>
+            </div>
+        </div>
+
         <!-- Ticket Information -->
 
         <div class="card shadow-sm mb-4">
-            <div class="card-header fw-bold">
+            <div class="card-header fw-bold bg-primary-subtle">
                 <i class="fa-solid fa-ticket ticket-icon"></i>
                 Ticket Information
             </div>
@@ -16,26 +25,11 @@
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label class="form-label" for="tracker">
-                            Tracker
+                            Tracker<span class="text-danger">*</span>
                         </label>
 
-                        <!-- <input type="text" class="form-control" readonly list="tracker-option" id="tracker"
-                            formControlName="tracker" (input)="validTracker()" placeholder="Select Tracker"
-                            data-bs-toggle="modal" data-bs-target="#trackerModel"> -->
-
-                        <input type="text" class="form-control" readonly list="tracker-option" id="tracker"
-                            formControlName="tracker" placeholder="Select Tracker" (click)="openModel(content)">
-
-                        <!-- <datalist id="tracker-option">
-                            <option *ngFor="let option of trackerOptions" [value]="option">
-                            </option>
-                        </datalist> -->
-
-                        <!-- OPTION VALIDATION MESSAGE FOR TRACKER -->
-
-                        <!-- <small class="text-danger" *ngIf="invalidTracker">
-                            No Data Found
-                        </small> -->
+                        <input type="text" class="form-control" readonly id="tracker" formControlName="tracker"
+                            placeholder="Select Tracker" (click)="openModel(content)">
 
                         <!-- VALIDATION MESSAGE FOR TRACKER -->
 
@@ -46,12 +40,13 @@
                     </div>
 
                     <div class="col-md-1 d-flex align-items-end mb-3">
-                        <button type="button" class="btn btn-primary" (click)="openModel(content)">...</button>
+                        <button type="button" class="btn btn-primary" (click)="openModel(content)"><i
+                                class="fa-solid fa-ticket ticket-icon"></i></button>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label" for="subject">
-                            Subject
+                            Subject<span class="text-danger">*</span>
                         </label>
 
                         <input type="text" class="form-control" formControlName="subject" id="subject"
@@ -68,7 +63,7 @@
                 <div>
 
                     <label class="form-label" for="description">
-                        Description
+                        Description<span class="text-danger">*</span>
                     </label>
 
                     <textarea rows="5" class="form-control" id="description" formControlName="description"
@@ -88,7 +83,7 @@
         <!-- Assignment -->
 
         <div class="card shadow-sm mb-4">
-            <div class="card-header fw-bold">
+            <div class="card-header fw-bold bg-primary-subtle">
                 <i class="fa-solid fa-user"></i>
                 Assignment & Priority
             </div>
@@ -96,7 +91,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="status">
-                            Status
+                            Status<span class="text-danger">*</span>
                         </label>
 
                         <input type="text" class="form-select" list="status-option" id="status" formControlName="status"
@@ -117,13 +112,13 @@
 
                         <small class="text-danger" *ngIf="ticketForm.get('status')?.touched &&
                                    ticketForm.get('status')?.invalid">
-                            Status is required
+                            Please select a status
                         </small>
                     </div>
 
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="priority">
-                            Priority
+                            Priority<span class="text-danger">*</span>
                         </label>
 
                         <input type="text" class="form-select" list="priority-option" id="priority"
@@ -150,7 +145,7 @@
 
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="assignee">
-                            Assignee
+                            Assignee<span class="text-danger">*</span>
                         </label>
 
                         <input type="text" class="form-select" list="assignee-option" id="assignee"
@@ -181,7 +176,7 @@
         <!-- Timeline -->
 
         <div class="card shadow-sm mb-4">
-            <div class="card-header fw-bold">
+            <div class="card-header fw-bold bg-primary-subtle">
                 <i class="fa-solid fa-calendar-days"></i>
                 Timeline
             </div>
@@ -190,7 +185,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="startDate">
-                            Start Date
+                            Start Date<span class="text-danger">*</span>
                         </label>
 
                         <input type="date" class="form-control" id="startDate" formControlName="startDate">
@@ -205,7 +200,7 @@
 
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="dueDate">
-                            Due Date
+                            Due Date<span class="text-danger">*</span>
                         </label>
 
                         <input type="date" class="form-control" id="dueDate" formControlName="dueDate"
@@ -234,7 +229,7 @@
         <!-- Progress -->
 
         <div class="card shadow-sm mb-4">
-            <div class="card-header fw-bold">
+            <div class="card-header fw-bold bg-primary-subtle">
                 <i class="fa-solid fa-chart-bar"></i>
                 Progress & Estimation
             </div>
@@ -243,11 +238,11 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label" for="progress">
-                            Progress (%)
+                            Progress (%)<span class="text-danger">*</span>
                         </label>
 
-                        <input type="number" class="form-control" id="progress" formControlName="progress"
-                            appPercentageValidation>
+                        <input type="number" class="form-control" id="progress" placeholder="Enter Progress"
+                            formControlName="progress" appPercentageValidation>
 
                         <small class="text-danger" *ngIf="ticketForm.get('progress')?.touched &&
                                    ticketForm.get('progress')?.invalid">
@@ -257,10 +252,11 @@
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label" for="estimstedHours">
-                            Estimated Hours
+                            Estimated Hours<span class="text-danger">*</span>
                         </label>
 
-                        <input type="number" class="form-control" id="estimstedHours" formControlName="estimatedHours"
+                        <input type="number" class="form-control" id="estimstedHours"
+                            placeholder="Enter Estimated Hours" formControlName="estimatedHours"
                             appEstimatedHoursValidation>
 
                         <small class="text-danger" *ngIf="ticketForm.get('estimatedHours')?.touched &&
@@ -277,7 +273,7 @@
                 {{ editId ? 'Update Ticket' : 'Create Ticket' }}
             </button>
 
-            <button class="btn btn-secondary" routerLink="/">Back</button>
+            <button class="btn btn-secondary" routerLink="/">Cancel</button>
 
         </div>
     </form>
@@ -285,7 +281,7 @@
     <ng-template #content let-c="close" let-d="dismiss">
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Select Tracker!</h4>
-            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+            <!-- <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button> -->
         </div>
         <div class="modal-body">
             <div class="list-group">

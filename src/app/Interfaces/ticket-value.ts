@@ -11,5 +11,4 @@ export interface TicketValue {
     updatedDate: string;
     progress: number,
     estimatedHours: number;
-    // file: ;
 }

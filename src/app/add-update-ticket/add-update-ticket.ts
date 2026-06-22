@@ -130,6 +130,13 @@ export class AddUpdateTicket implements OnInit {
 
   // THIS FUNCTION IS FOR SELECTING TRACKER IN MODEL
 
+  // selectTracker(tracker: string) {
+  //   this.ticketForm.patchValue({
+  //     tracker
+  //   });
+  //   this.modalService.dismissAll()
+  // }
+
   selectTracker(tracker: string) {
     this.ticketForm.patchValue({
       tracker: tracker
