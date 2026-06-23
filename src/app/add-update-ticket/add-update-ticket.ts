@@ -21,6 +21,8 @@ export class AddUpdateTicket implements OnInit {
 
   editId: number | null = null;
 
+  selectedTracker: string = '';
+
   invalidTracker = false;
   allowedTracker = ['New Request', 'Support'];
 
@@ -137,17 +139,20 @@ export class AddUpdateTicket implements OnInit {
   //   this.modalService.dismissAll()
   // }
 
-  selectTracker(tracker: string) {
-    this.ticketForm.patchValue({
-      tracker: tracker
-    });
-  }
-
-
   openModel(content: TemplateRef<any>) {
     this.modalService.open(content, { centered: true });
 
     console.log('NG-Bootstrap Model is open for Tracker field');
+  }
+
+  selectTracker(tracker: string) {
+    this.selectedTracker = tracker
+  }
+
+  saveTracker(){
+    this.ticketForm.patchValue({
+      tracker: this.selectedTracker
+    });
   }
 
   ngOnInit(): void {

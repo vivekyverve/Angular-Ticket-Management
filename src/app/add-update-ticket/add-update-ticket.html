@@ -286,16 +286,15 @@
         <div class="modal-body">
             <div class="list-group">
 
-                <option class="list-group-item list-group-item-action" *ngFor="let tracker of trackerOptions"
+                <button class="list-group-item list-group-item-action" *ngFor="let tracker of trackerOptions"
                     (click)="selectTracker(tracker.name)">
                     {{ tracker.name}}
-                </option>
+                </button>
 
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="c('Save click')">Save</button>
+            <button type="button" class="btn btn-primary" (click)=" saveTracker(); c('Save click')">Save</button>
         </div>
     </ng-template>
-
 </div>
