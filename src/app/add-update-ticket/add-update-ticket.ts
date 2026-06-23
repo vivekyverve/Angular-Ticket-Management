@@ -149,10 +149,25 @@ export class AddUpdateTicket implements OnInit {
     this.selectedTracker = tracker
   }
 
-  saveTracker(){
+  // saveTracker(){
+  //   this.ticketForm.patchValue({
+  //     tracker: this.selectedTracker
+  //   });
+  // }
+
+  saveTracker(close: any) {
+
+    if (!this.selectedTracker) {
+      this.ticketForm.get('tracker')?.setErrors({ required: true });
+      this.ticketForm.get('tracker')?.markAsTouched();
+      return;
+    }
+
     this.ticketForm.patchValue({
       tracker: this.selectedTracker
     });
+
+    close();
   }
 
   ngOnInit(): void {
