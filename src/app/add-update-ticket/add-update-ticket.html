@@ -139,7 +139,7 @@
 
                         <small class="text-danger" *ngIf="ticketForm.get('priority')?.touched &&
                                    ticketForm.get('priority')?.invalid">
-                            Priority is required
+                            Please select a Priority
                         </small>
                     </div>
 
@@ -166,7 +166,7 @@
 
                         <small class="text-danger" *ngIf="ticketForm.get('assignee')?.touched &&
                                    ticketForm.get('assignee')?.invalid">
-                            Assignee is required
+                            Please select an Assignee
                         </small>
                     </div>
                 </div>
@@ -194,7 +194,7 @@
 
                         <small class="text-danger" *ngIf="ticketForm.get('startDate')?.touched &&
                                    ticketForm.get('startDate')?.invalid">
-                            Start Date is required
+                            Please enter Start Date 
                         </small>
                     </div>
 
@@ -211,7 +211,7 @@
 
                         <small class="text-danger" *ngIf="ticketForm.get('dueDate')?.touched &&
                                    ticketForm.get('dueDate')?.invalid">
-                            Due Date is required
+                            Please enter Due Date
                         </small>
                     </div>
 
@@ -220,7 +220,7 @@
                             Updated Date
                         </label>
                         <input type="date" class="form-control" id="updatedDate" formControlName="updatedDate"
-                            [min]="ticketForm.get('startDate')?.value">
+                            [min]="ticketForm.get('startDate')?.value" [max]="ticketForm.get('dueDate')?.value">
                     </div>
                 </div>
             </div>
@@ -246,7 +246,7 @@
 
                         <small class="text-danger" *ngIf="ticketForm.get('progress')?.touched &&
                                    ticketForm.get('progress')?.invalid">
-                            Progress is required
+                            Progress must be between 0 to 100
                         </small>
                     </div>
 
@@ -255,13 +255,13 @@
                             Estimated Hours<span class="text-danger">*</span>
                         </label>
 
-                        <input type="number" class="form-control" id="estimstedHours"
+                        <input type="number" class="form-control" id="estimatedHours"
                             placeholder="Enter Estimated Hours" formControlName="estimatedHours"
                             appEstimatedHoursValidation>
 
                         <small class="text-danger" *ngIf="ticketForm.get('estimatedHours')?.touched &&
                                    ticketForm.get('estimatedHours')?.invalid">
-                            Estimated Hours is required
+                            Please enter Estimated Hours 
                         </small>
                     </div>
                 </div>

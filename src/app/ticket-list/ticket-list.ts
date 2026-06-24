@@ -13,7 +13,17 @@ import { Ticket } from '../Services/ticket';
 
 @Component({
   selector: 'app-ticket-list',
-  imports: [CommonModule, RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, MatTooltipModule],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatTableModule, 
+    MatSortModule, 
+    MatPaginatorModule, 
+    MatIconModule, 
+    MatTooltipModule,
+  ],
   templateUrl: './ticket-list.html',
   styleUrl: './ticket-list.css',
 })

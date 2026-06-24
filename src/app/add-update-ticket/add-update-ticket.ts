@@ -11,7 +11,13 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap/modal';
 
 @Component({
   selector: 'app-add-update-ticket',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, EstimatedHoursValidation, PercentageValidation,],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    RouterModule, 
+    EstimatedHoursValidation, 
+    PercentageValidation,
+  ],
   templateUrl: './add-update-ticket.html',
   styleUrl: './add-update-ticket.css',
   encapsulation: ViewEncapsulation.None,
